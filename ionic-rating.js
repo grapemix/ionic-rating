@@ -36,6 +36,9 @@
     $scope.rate = function(value) {
       if (!$scope.readonly && value >= 0 && value <= $scope.range.length) {
         ngModelCtrl.$setViewValue(value);
+        if(angular.isDefined($scope.callback)){
+          $scope.callback();
+        }
         return ngModelCtrl.$render();
       }
     };
@@ -71,7 +74,8 @@
       scope: {
         readonly: '=?',
         onHover: '&',
-        onLeave: '&'
+        onLeave: '&',
+        callback: '&'
       },
       controller: 'RatingController',
       template: '<ul class="rating" ng-mouseleave="reset()" ng-keydown="onKeydown($event)">' + '<li ng-repeat="r in range track by $index" ng-click="rate($index + 1)"><i class="icon" ng-class="$index < value && (r.stateOn || \'ion-ios-star\') || (r.stateOff || \'ion-ios-star-outline\')"></i></li>' + '</ul>',
