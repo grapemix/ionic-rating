@@ -37,7 +37,7 @@
       if (!$scope.readonly && value >= 0 && value <= $scope.range.length) {
         ngModelCtrl.$setViewValue(value);
         if(angular.isDefined($scope.callback)){
-          $scope.callback();
+          $scope.callback(value);
         }
         return ngModelCtrl.$render();
       }
